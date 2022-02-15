@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "326597680398",
+    "project_id": "evyemeklerimapp",
+    "storage_bucket": "evyemeklerimapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326597680398:android:a367cbb7ff1d6248118b5f",
+        "android_client_info": {
+          "package_name": "com.example.evyemeklerim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326597680398-j6g8kqoh4ik94rj11bu2m08h14c0kulo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWDVRLSHBERwrVA4FU9G86rGZ0_Nlr-vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326597680398-j6g8kqoh4ik94rj11bu2m08h14c0kulo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326597680398:android:fef8e4f0e130d635118b5f",
+        "android_client_info": {
+          "package_name": "com.example.evyemeklerim.activity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326597680398-j6g8kqoh4ik94rj11bu2m08h14c0kulo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWDVRLSHBERwrVA4FU9G86rGZ0_Nlr-vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326597680398-j6g8kqoh4ik94rj11bu2m08h14c0kulo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

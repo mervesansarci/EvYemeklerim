@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Ev Yemeklerim</string>
+    <string name="user_name">Kullanıcı Adı</string>
+    <string name="password">Parola</string>
+    <string name="password2">Parola(Tekrar)</string>
+    <string name="login">Giriş Yap</string>
+    <string name="register">Kayıt Ol</string>
+    <string name="phone_number">Telefon Numarası</string>
+    <string name="user_mail">Mail</string>
+    <string name="logout">Çıkış Yap -></string>
+    <string name="order_number">Sipariş Sayısı</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
