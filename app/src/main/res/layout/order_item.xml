@@ -59,14 +59,14 @@
                             android:id="@+id/tvOrderPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{orderObject.yemek_fiyat}"
+                            android:text="@{Integer.toString(orderObject.yemek_fiyat)}"
                             android:layout_weight="1"/>
 
                         <TextView
                             android:id="@+id/tvOrderNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{orderObject.yemek_siparis_adet}"
+                            android:text="@{Integer.toString(orderObject.yemek_siparis_adet)}"
                             android:layout_weight="1"/>
 
                     </LinearLayout>

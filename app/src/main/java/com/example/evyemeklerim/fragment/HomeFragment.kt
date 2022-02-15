@@ -18,26 +18,21 @@ import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
         binding.homeToolbar = "Ev Yemeklerim"
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
-
-        viewModel.foodList.observe(viewLifecycleOwner,{
-            val adapter = HomeAdapter(requireContext(), it, viewModel)
-            binding.homeAdapter = adapter
-        })
-
+        observeViewModel()
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        val tempViewModel: HomeViewModel by viewModels()
-        viewModel = tempViewModel
+        viewModel.getFoodList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -49,13 +44,20 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        viewModel.search(query)
+        //viewModel.search(query)
         return true
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        viewModel.search(newText)
+        //viewModel.search(newText)
         return true
+    }
+
+    fun observeViewModel(){
+        viewModel.foodList.observe(viewLifecycleOwner,{
+            val adapter = HomeAdapter(requireContext(), it, viewModel)
+            binding.homeAdapter = adapter
+        })
     }
 
 }

@@ -31,21 +31,26 @@ class FoodDetailFragment : Fragment() {
         binding.tvFoodName.text = getData.yemek_adi
         binding.tvFoodPrice.text = getData.yemek_fiyat.toString()
         binding.imgFood.setImageResource(R.drawable.resim)
-
+        observeViewModel()
         return binding.root
+    }
+
+    fun observeViewModel(){
+        viewModel.orderNumber.observe(viewLifecycleOwner,{
+            binding.tvNumber.text = it.toString()
+        })
+        viewModel.totalPrice.observe(viewLifecycleOwner,{
+            binding.tvOrderPrice.text = it.toString()
+        })
     }
 
     fun buttonPlusClick(number : String, price : String){
         viewModel.buttonPlusClick(number,price)
-        binding.tvNumber.text = viewModel.orderNumber.toString()
-        binding.tvOrderPrice.text = viewModel.totalPrice.toString()
         Log.e("Sipariş adeti", number)
     }
 
     fun buttonMinusClick(number : String, price : String){
         viewModel.buttonMinusClick(number, price)
-        binding.tvNumber.text = viewModel.orderNumber.toString()
-        binding.tvOrderPrice.text = viewModel.totalPrice.toString()
     }
 
     fun buttonAddOrderClick(){
