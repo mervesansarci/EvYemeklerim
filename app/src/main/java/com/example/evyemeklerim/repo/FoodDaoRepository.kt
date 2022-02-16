@@ -14,32 +14,18 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FoodDaoRepository {
-    var fdao : FoodsDaoInterface
+    private var fdao : FoodsDaoInterface = ApiUtils.getFoodsDaoInterface()
+    private var mFoodList = MutableLiveData<List<Foods>>()
 
-    init {
-        fdao = ApiUtils.getFoodsDaoInterface()
+    fun getFoodList() : LiveData<List<Foods>> {
+        return mFoodList
     }
 
-    fun getAllFood(): ArrayList<Foods> {
-        var list = ArrayList<Foods>()
-        /*val f1 = Foods(1, "Yemek", "resim", 35)
-        val f2 = Foods(2, "Yemek", "resim", 35)
-        val f3 = Foods(3, "Yemek", "resim", 35)
-        val f4 = Foods(4, "Yemek", "resim", 35)
-        val f5 = Foods(5, "Yemek", "resim", 35)
-        val f6 = Foods(6, "Yemek", "resim", 35)
-        val f7 = Foods(7, "Yemek", "resim", 35)
-        list.add(f1)
-        list.add(f2)
-        list.add(f3)
-        list.add(f4)
-        list.add(f5)
-        list.add(f6)
-        list.add(f7)
-        return list*/
+    fun getAllFood(){
         fdao.allFoods().enqueue(object : Callback<FoodsAnswer>{
             override fun onResponse(call: Call<FoodsAnswer>, response: Response<FoodsAnswer>) {
-                list = response.body().foods as ArrayList<Foods>
+                val list = response.body().foods as ArrayList<Foods>
+                mFoodList.postValue(list)
             }
 
             override fun onFailure(call: Call<FoodsAnswer>?, t: Throwable?) {
@@ -47,7 +33,6 @@ class FoodDaoRepository {
             }
 
         })
-        return list
     }
     
     fun getAllOrder() : ArrayList<Orders>{

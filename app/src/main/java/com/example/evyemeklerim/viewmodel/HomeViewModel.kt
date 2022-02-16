@@ -8,12 +8,15 @@ import com.example.evyemeklerim.entity.Foods
 import com.example.evyemeklerim.repo.FoodDaoRepository
 
 class HomeViewModel : ViewModel() {
-    private var mFoodList = MutableLiveData<List<Foods>>()
-    val foodList : LiveData<List<Foods>> = mFoodList
+    var foodList : LiveData<List<Foods>>
     private var repo = FoodDaoRepository()
 
+    init {
+        foodList = repo.getFoodList()
+    }
+
     fun getFoodList(){
-        mFoodList.postValue(repo.getAllFood())
+        repo.getAllFood()
     }
 
     fun search(searchKey : String){
