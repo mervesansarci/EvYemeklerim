@@ -44,12 +44,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        //viewModel.search(query)
+        viewModel.search(query)
         return true
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        //viewModel.search(newText)
+        viewModel.search(newText)
         return true
     }
 

@@ -15,4 +15,9 @@ class HomeViewModel : ViewModel() {
     fun getFoodList(){
         mFoodList.postValue(repo.getAllFood())
     }
+
+    fun search(searchKey : String){
+        Log.e("SearchKey", searchKey)
+    }
+
 }

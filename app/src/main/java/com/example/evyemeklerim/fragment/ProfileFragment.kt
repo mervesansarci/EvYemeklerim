@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.evyemeklerim.R
 import com.example.evyemeklerim.activity.LoginActivity
 import com.example.evyemeklerim.databinding.FragmentProfileBinding
+import com.example.evyemeklerim.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 

@@ -1,13 +1,16 @@
 package com.example.evyemeklerim.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.evyemeklerim.databinding.OrderItemBinding
 import com.example.evyemeklerim.entity.Orders
+import com.example.evyemeklerim.viewmodel.HomeViewModel
+import com.example.evyemeklerim.viewmodel.OrderViewModel
 
-class OrderAdapter(var mContext : Context, var orderList: List<Orders>) : RecyclerView.Adapter<OrderAdapter.OrderItem>(){
+class OrderAdapter(var mContext : Context, var orderList: List<Orders>, var viewModel: OrderViewModel) : RecyclerView.Adapter<OrderAdapter.OrderItem>(){
 
     inner class OrderItem(binding : OrderItemBinding) : RecyclerView.ViewHolder(binding.root){
        var binding : OrderItemBinding
@@ -25,6 +28,7 @@ class OrderAdapter(var mContext : Context, var orderList: List<Orders>) : Recycl
     override fun onBindViewHolder(holder: OrderItem, position: Int) {
         val order = orderList.get(position)
         val h = holder.binding
+        h.imgDelete.setOnClickListener { viewModel.deleteOrder()}
         h.orderObject = order
         h.imgOrder.setImageResource(mContext.resources.getIdentifier(order.yemek_resim_adi, "drawable",mContext.packageName))
     }
@@ -32,4 +36,5 @@ class OrderAdapter(var mContext : Context, var orderList: List<Orders>) : Recycl
     override fun getItemCount(): Int {
         return orderList.size
     }
+
 }
