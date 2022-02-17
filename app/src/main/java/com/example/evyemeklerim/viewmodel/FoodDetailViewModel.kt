@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.evyemeklerim.entity.Foods
 import com.example.evyemeklerim.repo.FoodDaoRepository
 
 class FoodDetailViewModel : ViewModel() {
+    private var repo = FoodDaoRepository()
     private var mOrderNumber = MutableLiveData<Int>()
     val orderNumber : LiveData<Int> = mOrderNumber
     private var mTotalPrice = MutableLiveData<Int>()
@@ -33,8 +33,8 @@ class FoodDetailViewModel : ViewModel() {
         mTotalPrice.postValue(totalPriceTmp)
     }
 
-    fun buttonAddOrderClick(){
-        Log.e("Sipariş Verildi", "Sipariş")
+    fun buttonAddOrderClick(yemek_adi:String, yemek_resim_adi: String, yemek_fiyat: Int, yemek_siparis_adet: Int, kullanici_adi: String){
+        repo.setOrder(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi)
     }
 
 }

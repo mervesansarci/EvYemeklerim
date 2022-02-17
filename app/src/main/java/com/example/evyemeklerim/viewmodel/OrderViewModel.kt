@@ -9,19 +9,22 @@ import com.example.evyemeklerim.entity.Orders
 import com.example.evyemeklerim.repo.FoodDaoRepository
 
 class OrderViewModel: ViewModel() {
-    private var mOrderList = MutableLiveData<List<Orders>>()
-    val orderList : LiveData<List<Orders>> = mOrderList
+    var orderList : LiveData<List<Orders>>
     private var repo = FoodDaoRepository()
 
+    init {
+        orderList = repo.getOrderList()
+    }
+
     fun getOrderList(){
-        mOrderList.postValue(repo.getAllOrder())
+        repo.getAllOrder("qq")
     }
 
     fun buttonOrderClick() {
         Log.e("Siparis", "Verildi")
     }
 
-    fun deleteOrder(){
-        repo.deleteOrder()
+    fun deleteOrder(sepet_yemek_id:Int,kullanici_adi:String){
+        repo.deleteOrder(sepet_yemek_id,kullanici_adi)
     }
 }

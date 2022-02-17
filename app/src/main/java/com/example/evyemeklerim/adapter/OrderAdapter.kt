@@ -28,7 +28,7 @@ class OrderAdapter(var mContext : Context, var orderList: List<Orders>, var view
     override fun onBindViewHolder(holder: OrderItem, position: Int) {
         val order = orderList.get(position)
         val h = holder.binding
-        h.imgDelete.setOnClickListener { viewModel.deleteOrder()}
+        h.imgDelete.setOnClickListener { viewModel.deleteOrder(order.sepet_yemek_id,order.kullanici_adi)}
         h.orderObject = order
         h.imgOrder.setImageResource(mContext.resources.getIdentifier(order.yemek_resim_adi, "drawable",mContext.packageName))
     }

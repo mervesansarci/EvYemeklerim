@@ -1,7 +1,6 @@
 package com.example.evyemeklerim.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,14 @@ import androidx.navigation.fragment.navArgs
 import com.example.evyemeklerim.R
 import com.example.evyemeklerim.databinding.FragmentFoodDetailBinding
 import com.example.evyemeklerim.viewmodel.FoodDetailViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 
 class FoodDetailFragment : Fragment() {
     private lateinit var binding: FragmentFoodDetailBinding
     private val viewModel : FoodDetailViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,13 +26,13 @@ class FoodDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_food_detail, container, false)
         binding.foodDetailFragment = this
         binding.foodDetailToolbar = "Yemek Detayı"
-
         val bundle: FoodDetailFragmentArgs by navArgs()
         val getData = bundle.food
+        binding.foodObject = getData
 
-        binding.tvFoodName.text = getData.yemek_adi
-        binding.tvFoodPrice.text = getData.yemek_fiyat.toString()
-        binding.imgFood.setImageResource(R.drawable.resim)
+        val foodImageName = getData.yemek_resim_adi
+        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/$foodImageName"
+        Picasso.get().load(imageUrl).into(binding.imgFood)
         observeViewModel()
         return binding.root
     }
@@ -46,7 +48,6 @@ class FoodDetailFragment : Fragment() {
 
     fun buttonPlusClick(number : String, price : String){
         viewModel.buttonPlusClick(number,price)
-        Log.e("Sipariş adeti", number)
     }
 
     fun buttonMinusClick(number : String, price : String){
@@ -54,6 +55,6 @@ class FoodDetailFragment : Fragment() {
     }
 
     fun buttonAddOrderClick(){
-        viewModel.buttonAddOrderClick()
+        viewModel.buttonAddOrderClick("asdf","asdf",1,1,"qq")
     }
 }

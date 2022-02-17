@@ -3,11 +3,10 @@ package com.example.evyemeklerim.repo
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.evyemeklerim.entity.Foods
-import com.example.evyemeklerim.entity.FoodsAnswer
-import com.example.evyemeklerim.entity.Orders
+import com.example.evyemeklerim.entity.*
 import com.example.evyemeklerim.retrofit.ApiUtils
 import com.example.evyemeklerim.retrofit.FoodsDaoInterface
+import com.example.evyemeklerim.viewmodel.OrderViewModel
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,9 +15,14 @@ import retrofit2.Response
 class FoodDaoRepository {
     private var fdao : FoodsDaoInterface = ApiUtils.getFoodsDaoInterface()
     private var mFoodList = MutableLiveData<List<Foods>>()
+    private var mOrderList = MutableLiveData<List<Orders>>()
 
     fun getFoodList() : LiveData<List<Foods>> {
         return mFoodList
+    }
+
+    fun getOrderList() : LiveData<List<Orders>>{
+        return mOrderList
     }
 
     fun getAllFood(){
@@ -35,27 +39,40 @@ class FoodDaoRepository {
         })
     }
     
-    fun getAllOrder() : ArrayList<Orders>{
-        val list = ArrayList<Orders>()
-        val f1 = Orders(1, "Yemek", "resim", 35, 1, "feyza")
-        val f2 = Orders(2, "Yemek", "resim", 35, 1, "feyza")
-        val f3 = Orders(3, "Yemek", "resim", 35, 1, "feyza")
-        val f4 = Orders(4, "Yemek", "resim", 35, 1, "feyza")
-        val f5 = Orders(5, "Yemek", "resim", 35, 1, "feyza")
-        val f6 = Orders(6, "Yemek", "resim", 35, 1, "feyza")
-        val f7 = Orders(7, "Yemek", "resim", 35, 1, "feyza")
-        list.add(f1)
-        list.add(f2)
-        list.add(f3)
-        list.add(f4)
-        list.add(f5)
-        list.add(f6)
-        list.add(f7)
-        return list
+    fun getAllOrder(kullanici_adi: String){
+        fdao.allOrders(kullanici_adi).enqueue(object : Callback<OrderAnswer>{
+            override fun onResponse(call: Call<OrderAnswer>, response: Response<OrderAnswer>) {
+                val list = response.body().sepet_yemekler as ArrayList<Orders>
+                mOrderList.postValue(list)
+            }
+
+            override fun onFailure(call: Call<OrderAnswer>?, t: Throwable?) {
+                Log.e("veri alma", "başarısız")
+            }
+
+        })
     }
 
-    fun deleteOrder(){
-        Log.e("Siparis", "Silindi")
+    fun deleteOrder(sepet_yemek_id:Int,kullanici_adi:String){
+        fdao.deleteOrder(sepet_yemek_id,kullanici_adi).enqueue(object : Callback<CRUD>{
+            override fun onResponse(call: Call<CRUD>?, response: Response<CRUD>?) {
+                getAllOrder(kullanici_adi)
+                Log.e("Sipariş", "silindi")
+            }
+
+            override fun onFailure(call: Call<CRUD>?, t: Throwable?) {}
+        })
+    }
+
+    fun setOrder(yemek_adi:String, yemek_resim_adi: String, yemek_fiyat: Int, yemek_siparis_adet: Int, kullanici_adi: String){
+        fdao.addOrder(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi).enqueue(object : Callback<CRUD>{
+            override fun onResponse(call: Call<CRUD>?, response: Response<CRUD>?) {
+                Log.e("Sepete", "eklendi")
+            }
+
+            override fun onFailure(call: Call<CRUD>?, t: Throwable?) {}
+
+        })
     }
 
 }
