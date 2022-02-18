@@ -23,13 +23,17 @@ class OrderFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false)
         binding.orderFragment = this
         binding.orderToolbar = "Siparişler"
-        observeViewModel()
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getOrderList()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
     }
 
     fun buttonOrderClick() {

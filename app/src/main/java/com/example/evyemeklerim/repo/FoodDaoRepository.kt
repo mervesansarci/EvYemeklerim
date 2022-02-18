@@ -47,9 +47,9 @@ class FoodDaoRepository {
                 val list = response.body().sepet_yemekler as ArrayList<Orders>
                 mOrderList.postValue(list)
             }
-
             override fun onFailure(call: Call<OrderAnswer>?, t: Throwable?) {
                 Log.e("veri alma", "başarısız")
+                mOrderList.postValue(arrayListOf())
             }
 
         })

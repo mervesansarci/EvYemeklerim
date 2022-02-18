@@ -13,7 +13,6 @@ class OrderViewModel: ViewModel() {
     private var repo = FoodDaoRepository()
 
     init {
-        getOrderList()
         orderList = repo.getOrderList()
     }
 
