@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.evyemeklerim.R
 import com.example.evyemeklerim.activity.LoginActivity
+import com.example.evyemeklerim.activity.SplashScreen
 import com.example.evyemeklerim.databinding.FragmentProfileBinding
+import com.example.evyemeklerim.session.SessionManager
 import com.example.evyemeklerim.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -29,23 +31,30 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loadUser()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
+        loadUser()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
     }
 
     fun loadUser(){
-        viewModel.getUserData()
+        if (SessionManager.currentUser == null){
+            viewModel.getUserData()
+        }else{
+            binding.userObject = SessionManager.currentUser
+        }
     }
 
     fun tvLogoutClick(){
         auth.signOut()
-        startActivity(Intent(requireContext(), LoginActivity::class.java))
+        SessionManager.currentUser = null
+        startActivity(Intent(requireContext(), SplashScreen::class.java))
+        requireActivity().finish()
     }
 
     fun observeViewModel(){

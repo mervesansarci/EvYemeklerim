@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class UserDaoRepository {
-    var mUser: MutableLiveData<User>
+    var mUser: MutableLiveData<User?>
     private var auth: FirebaseAuth
     private var database: FirebaseDatabase? = null
 
@@ -32,13 +32,12 @@ class UserDaoRepository {
         return mDatabaseRef
     }
 
-    /*fun login(email : String, password : String){
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
-            return@addOnCompleteListener
-        }
-    }*/
 
     fun getUserData() {
+        if (auth.currentUser == null){
+            mUser.postValue(null)
+            return
+        }
         val databaseRef = database?.reference!!.child("user").child(auth.currentUser?.uid!!)
             databaseRef.addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {

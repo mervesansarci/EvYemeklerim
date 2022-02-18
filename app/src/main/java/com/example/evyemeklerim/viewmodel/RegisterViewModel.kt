@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.evyemeklerim.entity.User
 import com.example.evyemeklerim.repo.UserDaoRepository
+import com.example.evyemeklerim.session.SessionManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -20,6 +21,7 @@ class RegisterViewModel : ViewModel() {
             repo.register(user)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
+                        SessionManager.currentUser = user
                         mRegisterResult.postValue(true)
                     }
 
