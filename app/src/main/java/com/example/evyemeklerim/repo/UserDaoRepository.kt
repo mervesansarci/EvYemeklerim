@@ -10,16 +10,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class UserDaoRepository {
-    var user: MutableLiveData<User>
+    var mUser: MutableLiveData<User>
     private var auth: FirebaseAuth
     private var database: FirebaseDatabase? = null
-    private var databaseRef : DatabaseReference
 
     init {
-        user = MutableLiveData()
+        mUser = MutableLiveData()
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        databaseRef = database?.reference!!.child("user").child(auth.currentUser?.uid!!)
+
     }
 
     fun register(user: User): DatabaseReference {
@@ -29,7 +28,7 @@ class UserDaoRepository {
         mDatabaseRef.child("userName").setValue(user.username)
         mDatabaseRef.child("mail").setValue(user.mail)
         mDatabaseRef.child("phone").setValue(user.phoneNumber)
-        mDatabaseRef.child("orderNumber").setValue(user.orderNumber)
+        mDatabaseRef.child("id").setValue(user.id)
         return mDatabaseRef
     }
 
@@ -39,20 +38,20 @@ class UserDaoRepository {
         }
     }*/
 
-    fun getUserData(user: User): User {
+    fun getUserData() {
+        val databaseRef = database?.reference!!.child("user").child(auth.currentUser?.uid!!)
             databaseRef.addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    user.username = snapshot.child("userName").value.toString()
-                    user.mail = snapshot.child("mail").value.toString()
-                    user.phoneNumber = snapshot.child("phone").value.toString()
-                    user.orderNumber = snapshot.child("orderNumber").value as Int
-                    return
+                    val user = User(snapshot.child("id").value.toString(),
+                        snapshot.child("mail").value.toString(),
+                        snapshot.child("userName").value.toString(),
+                        snapshot.child("phone").value.toString())
+                    mUser.postValue(user)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
 
             })
-        return user
     }
 }

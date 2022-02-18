@@ -5,6 +5,4 @@ data class User(
     var mail : String,
     var username : String,
     var phoneNumber : String,
-    var password : String,
-    var orderNumber : Int = 0
 )

@@ -18,8 +18,7 @@ import com.google.firebase.database.*
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth : FirebaseAuth
-    private var databaseRef : DatabaseReference? = null
-    private var database : FirebaseDatabase? = null
+    private val viewModel : ProfileViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,38 +26,32 @@ class ProfileFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile ,container, false)
         binding.fragmentProfil = this
         binding.profileToolbar = "Profil"
-
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        databaseRef = database?.reference!!.child("user")
-        loadUser()
-
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadUser()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
+    }
+
     fun loadUser(){
-        /*val user = auth.currentUser
-        val userRef = databaseRef?.child(user?.uid!!)
-
-        userRef?.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                binding.tvUserName.text = snapshot.child("userName").value.toString()
-                binding.tvMail.text = snapshot.child("mail").value.toString()
-                binding.tvTel.text = snapshot.child("phone").value.toString()
-                binding.tvOrderNumber.text = snapshot.child("orderNumber").value.toString()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })*/
-
+        viewModel.getUserData()
     }
 
     fun tvLogoutClick(){
         auth.signOut()
         startActivity(Intent(requireContext(), LoginActivity::class.java))
+    }
+
+    fun observeViewModel(){
+        viewModel.mDatabaseResult.observe(viewLifecycleOwner,{
+            binding.userObject = it
+        })
     }
 
 }

@@ -10,10 +10,13 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
     private val repo = UserDaoRepository()
-    private var mDatabaseResult = MutableLiveData<User>()
-    var databaseResult : LiveData<User> = mDatabaseResult
+    var mDatabaseResult : LiveData<User>
 
-    fun getUserData(user: User){
-        repo.getUserData(user)
+    init {
+        mDatabaseResult = repo.mUser
+    }
+
+    fun getUserData(){
+        repo.getUserData()
     }
 }

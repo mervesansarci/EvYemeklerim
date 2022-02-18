@@ -6,6 +6,7 @@
     <data>
         <variable name="fragmentProfil" type="com.example.evyemeklerim.fragment.ProfileFragment" />
         <variable name="profileToolbar" type="String" />
+        <variable name="userObject" type="com.example.evyemeklerim.entity.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +55,7 @@
                     android:id="@+id/tvUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/user_name"
+                    android:text="@{userObject.username}"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -64,7 +65,7 @@
                     android:id="@+id/tvMail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/user_mail"
+                    android:text="@{userObject.mail}"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -73,16 +74,7 @@
                     android:id="@+id/tvTel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/phone_number"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tvOrderNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/order_number"
+                    android:text="@{userObject.phoneNumber}"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />

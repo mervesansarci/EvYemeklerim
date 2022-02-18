@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
                 }else{
                     auth.createUserWithEmailAndPassword(mail,password).addOnCompleteListener {
                         if (it.isSuccessful && auth.currentUser != null){
-                            val user = User(auth.currentUser!!.uid,mail,username,phone,password)
+                            val user = User(auth.currentUser!!.uid,mail,username,phone)
                             viewModel.registerUser(user)
                         }else{
                             Snackbar.make(binding.root, "Kayıt oluşturma başarısız.", Snackbar.LENGTH_LONG).show()
