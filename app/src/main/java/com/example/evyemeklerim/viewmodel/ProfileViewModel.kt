@@ -14,8 +14,6 @@ class ProfileViewModel : ViewModel() {
     var databaseResult : LiveData<User> = mDatabaseResult
 
     fun getUserData(user: User){
-        viewModelScope.launch {
-            mDatabaseResult.postValue(user)
-        }
+        repo.getUserData(user)
     }
 }

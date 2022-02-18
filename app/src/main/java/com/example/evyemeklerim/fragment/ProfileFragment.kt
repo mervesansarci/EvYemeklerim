@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun loadUser(){
-        val user = auth.currentUser
+        /*val user = auth.currentUser
         val userRef = databaseRef?.child(user?.uid!!)
 
         userRef?.addValueEventListener(object: ValueEventListener{
@@ -52,7 +52,7 @@ class ProfileFragment : Fragment() {
                 TODO("Not yet implemented")
             }
 
-        })
+        })*/
 
     }
 

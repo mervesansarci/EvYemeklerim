@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso
 import kotlin.math.log
 
 class HomeAdapter(var mContext : Context, var foodList: List<Foods>, var viewModel: HomeViewModel) : RecyclerView.Adapter<HomeAdapter.HomeItem>(){
-
+    
     inner class HomeItem(binding : HomeItemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding : HomeItemBinding
         init {
@@ -40,7 +40,7 @@ class HomeAdapter(var mContext : Context, var foodList: List<Foods>, var viewMod
         val foodImageName = food.yemek_resim_adi
         var imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/$foodImageName"
         h.foodObject = food
-        Picasso.get().load(imageUrl).resize(50, 50).centerCrop().into(h.imgFood)
+        Picasso.get().load(imageUrl).into(h.imgFood)
         h.homeItem.setOnClickListener {
             val action = HomeFragmentDirections.actionGoFoodDetail(food)
             Navigation.findNavController(it).navigate(action)

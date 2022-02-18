@@ -1,6 +1,7 @@
 package com.example.evyemeklerim.repo
 
 import android.content.Intent
+import androidx.lifecycle.MutableLiveData
 import com.example.evyemeklerim.activity.MainActivity
 import com.example.evyemeklerim.entity.User
 import com.google.android.material.snackbar.Snackbar
@@ -9,9 +10,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class UserDaoRepository {
-
-    private lateinit var auth: FirebaseAuth
+    var user: MutableLiveData<User>
+    private var auth: FirebaseAuth
     private var database: FirebaseDatabase? = null
+    private var databaseRef : DatabaseReference
+
+    init {
+        user = MutableLiveData()
+        database = FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
+        databaseRef = database?.reference!!.child("user").child(auth.currentUser?.uid!!)
+    }
 
     fun register(user: User): DatabaseReference {
         auth = FirebaseAuth.getInstance()
@@ -31,11 +40,7 @@ class UserDaoRepository {
     }*/
 
     fun getUserData(user: User): User {
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        val firebaseUser = auth.currentUser
-        val mDatabaseRef = database?.reference!!.child("user").child(firebaseUser?.uid!!)
-            .addValueEventListener(object : ValueEventListener{
+            databaseRef.addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     user.username = snapshot.child("userName").value.toString()
                     user.mail = snapshot.child("mail").value.toString()

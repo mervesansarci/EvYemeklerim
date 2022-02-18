@@ -42,4 +42,9 @@ class OrderFragment : Fragment() {
             binding.orderAdapter = adapter
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getOrderList()
+    }
 }
