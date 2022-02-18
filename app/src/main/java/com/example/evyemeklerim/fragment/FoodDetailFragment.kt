@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.evyemeklerim.R
 import com.example.evyemeklerim.databinding.FragmentFoodDetailBinding
+import com.example.evyemeklerim.entity.Foods
+import com.example.evyemeklerim.entity.User
 import com.example.evyemeklerim.viewmodel.FoodDetailViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -55,6 +57,10 @@ class FoodDetailFragment : Fragment() {
     }
 
     fun buttonAddOrderClick(){
-        viewModel.buttonAddOrderClick("asdf","asdf",1,1,"qq")
+        viewModel.buttonAddOrderClick(binding.foodObject!!.yemek_adi,
+            binding.foodObject!!.yemek_resim_adi,
+            binding.tvOrderPrice.text.toString().toInt(),
+            binding.tvNumber.text.toString().toInt(),
+        "qq")
     }
 }

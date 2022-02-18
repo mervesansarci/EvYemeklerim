@@ -9,6 +9,7 @@ import com.example.evyemeklerim.databinding.OrderItemBinding
 import com.example.evyemeklerim.entity.Orders
 import com.example.evyemeklerim.viewmodel.HomeViewModel
 import com.example.evyemeklerim.viewmodel.OrderViewModel
+import com.squareup.picasso.Picasso
 
 class OrderAdapter(var mContext : Context, var orderList: List<Orders>, var viewModel: OrderViewModel) : RecyclerView.Adapter<OrderAdapter.OrderItem>(){
 
@@ -30,7 +31,9 @@ class OrderAdapter(var mContext : Context, var orderList: List<Orders>, var view
         val h = holder.binding
         h.imgDelete.setOnClickListener { viewModel.deleteOrder(order.sepet_yemek_id,order.kullanici_adi)}
         h.orderObject = order
-        h.imgOrder.setImageResource(mContext.resources.getIdentifier(order.yemek_resim_adi, "drawable",mContext.packageName))
+        val foodImageName = order.yemek_resim_adi
+        var imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/$foodImageName"
+        Picasso.get().load(imageUrl).into(h.imgOrder)
     }
 
     override fun getItemCount(): Int {
