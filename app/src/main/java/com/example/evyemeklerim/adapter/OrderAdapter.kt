@@ -29,7 +29,7 @@ class OrderAdapter(var mContext : Context, var orderList: List<Orders>, var view
     override fun onBindViewHolder(holder: OrderItem, position: Int) {
         val order = orderList.get(position)
         val h = holder.binding
-        h.imgDelete.setOnClickListener { viewModel.deleteOrder(order.sepet_yemek_id,order.kullanici_adi)}
+        h.imgDelete.setOnClickListener { viewModel.deleteOrder(order.sepet_yemek_id)}
         h.orderObject = order
         val foodImageName = order.yemek_resim_adi
         var imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/$foodImageName"

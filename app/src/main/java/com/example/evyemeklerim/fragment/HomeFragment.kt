@@ -16,7 +16,7 @@ import com.example.evyemeklerim.entity.Foods
 import com.example.evyemeklerim.viewmodel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
+class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
 
@@ -33,24 +33,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         viewModel.getFoodList()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-        val item = menu.findItem(R.id.actionSearch)
-        var searchView = item.actionView as SearchView
-        searchView.setOnQueryTextListener(this)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onQueryTextSubmit(query: String): Boolean {
-        viewModel.search(query)
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String): Boolean {
-        viewModel.search(newText)
-        return true
     }
 
     fun observeViewModel(){

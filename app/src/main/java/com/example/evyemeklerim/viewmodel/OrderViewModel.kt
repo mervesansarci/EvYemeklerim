@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.evyemeklerim.entity.Foods
 import com.example.evyemeklerim.entity.Orders
 import com.example.evyemeklerim.repo.FoodDaoRepository
+import com.example.evyemeklerim.session.SessionManager
 
 class OrderViewModel: ViewModel() {
     var orderList : LiveData<List<Orders>>
@@ -17,14 +18,11 @@ class OrderViewModel: ViewModel() {
     }
 
     fun getOrderList(){
-        repo.getAllOrder("qq")
+        repo.getAllOrder(SessionManager.currentUser!!.username)
     }
 
-    fun buttonOrderClick() {
-        Log.e("Siparis", "Verildi")
-    }
 
-    fun deleteOrder(sepet_yemek_id:Int,kullanici_adi:String){
-        repo.deleteOrder(sepet_yemek_id,kullanici_adi)
+    fun deleteOrder(sepet_yemek_id:Int){
+        repo.deleteOrder(sepet_yemek_id,SessionManager.currentUser!!.username)
     }
 }

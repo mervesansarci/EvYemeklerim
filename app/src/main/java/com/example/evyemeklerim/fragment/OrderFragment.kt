@@ -36,10 +36,6 @@ class OrderFragment : Fragment() {
         observeViewModel()
     }
 
-    fun buttonOrderClick() {
-        viewModel.buttonOrderClick()
-    }
-
     fun observeViewModel(){
         viewModel.orderList.observe(viewLifecycleOwner,{
             val adapter = OrderAdapter(requireContext(), it, viewModel)

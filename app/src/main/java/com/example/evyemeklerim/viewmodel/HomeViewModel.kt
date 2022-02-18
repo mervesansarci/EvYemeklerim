@@ -10,21 +10,15 @@ import java.util.*
 
 class HomeViewModel : ViewModel() {
     var foodList : LiveData<List<Foods>>
-    var searchList : LiveData<List<Foods>>
     private var repo = FoodDaoRepository()
 
     init {
         foodList = repo.getFoodList()
-        searchList = repo.getFoodList()
     }
 
     fun getFoodList(){
         repo.getAllFood()
     }
 
-    fun search(searchKey : String){
-        Log.e("SearchKey", searchKey)
-        repo.search(searchKey)
-    }
 
 }

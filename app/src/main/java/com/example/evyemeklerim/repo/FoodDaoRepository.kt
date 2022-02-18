@@ -71,13 +71,9 @@ class FoodDaoRepository {
             override fun onResponse(call: Call<CRUD>?, response: Response<CRUD>?) {
                 Log.e("Sepete", "eklendi")
             }
-
             override fun onFailure(call: Call<CRUD>?, t: Throwable?) {}
 
         })
     }
 
-    fun search(searchKey : String){
-
-    }
 }
