@@ -43,29 +43,63 @@
                 tools:src="@tools:sample/avatars"
                 android:layout_gravity="center"/>
 
-            <TextView
-                android:id="@+id/tvFoodName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@{foodObject.yemek_adi}"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvFoodPrice"
-                android:layout_width="wrap_content"
+
+                <TextView
+                    android:id="@+id/tvFoodNameInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yemek Adı:"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/tvFoodName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text='@{foodObject.yemek_adi}'
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@{Integer.toString(foodObject.yemek_fiyat)}"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvFoodPriceInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yemek Fiyatı:"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:id="@+id/tvFoodPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{Integer.toString(foodObject.yemek_fiyat)}"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
