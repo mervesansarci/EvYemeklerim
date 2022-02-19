@@ -15,6 +15,7 @@ import com.example.evyemeklerim.entity.Foods
 import com.example.evyemeklerim.entity.User
 import com.example.evyemeklerim.session.SessionManager
 import com.example.evyemeklerim.viewmodel.FoodDetailViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -64,5 +65,6 @@ class FoodDetailFragment : Fragment() {
             binding.tvOrderPrice.text.toString().toInt(),
             binding.tvNumber.text.toString().toInt(),
             SessionManager.currentUser!!.username)
+        Snackbar.make(binding.root,"Sepete ekleme başarılı", Snackbar.LENGTH_LONG).show()
     }
 }
